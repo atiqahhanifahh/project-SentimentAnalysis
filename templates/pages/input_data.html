@@ -1,0 +1,47 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+
+{% block content %}
+
+
+
+<!-- [ Main Content ] start -->
+<div class="row">
+    <div class="col-md-6 col-xl-6">
+        <div class="card card-social">
+            <div class="card-block border-bottom">
+                <div class="row align-items-center justify-content-center">
+                    <!-- <div class="col-auto">
+            <i class="fab fa-facebook-f text-primary f-36"></i>
+          </div> -->
+
+                    <div class="col text-left">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <h3 class="mb-3">Input Data Mentah</h3>
+                            <input type="text" name="text" class="form-control mb-3"
+                                placeholder="Masukkan kalimat disini" />
+                            <input type="submit" class="btn btn-md btn-primary" />
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            {% if hasil %}
+            <div class="card-block">
+                <div class="row align-items-center justify-content-center card-active">
+                    <div class="col-12">
+                        <h6 class="text-center m-b-10"><span class="text-muted m-r-5">Hasil Preprocessing</span></h6>
+                        <h6 class="text-center m-b-10"><span class="text-muted m-r-5">{{ hasil.data }}</span></h6>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+
+{% endblock content %}

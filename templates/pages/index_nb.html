@@ -1,0 +1,358 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+
+{% block content %}
+
+<!-- [ Main Content ] start -->
+<h2 class="mb-3">Naive Bayes</h2>
+<div class="row">
+    <div class="col-md-6 col-xl-6">
+        <div class="card card-social">
+            <div class="card-block border-bottom">
+                <div class="row align-items-center justify-content-center">
+                    <!-- <div class="col-auto">
+            <i class="fab fa-facebook-f text-primary f-36"></i>
+          </div> -->
+                    <div class="col text-left">
+                        <h3>Anies Baswedan</h3>
+                        <h5 class="text-c-green mb-0"><span class="text-muted">Klasifikasi Sentiment ({{ jumlah_dataset }} Datasets)</span></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <div class="row align-items-center justify-content-center card-active">
+                    <div class="col-4">
+                        <h6 class="text-center m-b-10"><span class="text-muted m-r-5">Positif:</span>
+                            {{ anies_baswedan.data.n_positif }}</h6>
+                        <div class="progress">
+                            <div class="progress-bar progress-c-theme" role="progressbar" style="width:60%;height:6px;"
+                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <h6 class="text-center  m-b-10"><span class="text-muted m-r-5">Neutral:</span>
+                            {{ anies_baswedan.data.n_neutral }}</h6>
+                        <div class="progress">
+                            <div class="progress-bar progress-c-theme3" role="progressbar" style="width:45%;height:6px;"
+                                aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <h6 class="text-center  m-b-10"><span class="text-muted m-r-5">Negatif:</span>
+                            {{ anies_baswedan.data.n_negatif }}</h6>
+                        <div class="progress">
+                            <div class="progress-bar progress-c-theme4" role="progressbar" style="width:45%;height:6px;"
+                                aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-6">
+        <div class="card card-social">
+            <div class="card-block border-bottom">
+                <div class="row align-items-center justify-content-center">
+                    <!-- <div class="col-auto">
+            <i class="fab fa-facebook-f text-primary f-36"></i>
+          </div> -->
+                    <div class="col text-left">
+                        <h3>Ganjar Pranowo</h3>
+                        <h5 class="text-c-green mb-0"><span class="text-muted">Klasifikasi Sentiment ({{ jumlah_dataset2 }} Datasets)</span></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <div class="row align-items-center justify-content-center card-active">
+                    <div class="col-4">
+                        <h6 class="text-center m-b-10"><span class="text-muted m-r-5">Positif:</span>
+                            {{ ganjar_pranowo.data.n_positif }}</h6>
+                        <div class="progress">
+                            <div class="progress-bar progress-c-theme" role="progressbar" style="width:60%;height:6px;"
+                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <h6 class="text-center  m-b-10"><span class="text-muted m-r-5">Neutral:</span>
+                            {{ ganjar_pranowo.data.n_neutral }}</h6>
+                        <div class="progress">
+                            <div class="progress-bar progress-c-theme3" role="progressbar" style="width:45%;height:6px;"
+                                aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <h6 class="text-center  m-b-10"><span class="text-muted m-r-5">Negatif:</span>
+                            {{ ganjar_pranowo.data.n_negatif }}</h6>
+                        <div class="progress">
+                            <div class="progress-bar progress-c-theme4" role="progressbar" style="width:45%;height:6px;"
+                                aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-md-6">
+        <div class="card user-list">
+            <div class="card-header">
+                <h5>Cross Validasi K-Fold<br /><br />Anies Baswedan</h5>
+            </div>
+            <div class="card-block">
+                <div class="row align-items-center justify-content-center m-b-20">
+                    <div class="col-12">
+                        <h5 class="f-w-300 align-items-center m-0">Tertinggi: {{ cvs_max_anies_baswedan }}% &nbsp;&nbsp;
+                            Terrendah:
+                            {{ cvs_min_anies_baswedan }}%</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for value in cvs_anies_baswedan %}
+                    <div class="col-xl-12">
+                        <h6 class="align-items-center float-left">
+                            {{ value.no }}
+                        </h6>
+                        <h6 class="align-items-center float-right">{{ value.total }}%</h6>
+                        <div class="progress m-t-30 m-b-20" style="height: 6px;">
+                            <div class="progress-bar progress-c-theme{{ value.theme }}" role="progressbar"
+                                style="width: {{ value.total }}%;" aria-valuenow="{{ value.total }}" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-md-6">
+        <div class="card user-list">
+            <div class="card-header">
+                <h5>Cross Validasi K-Fold<br /><br />Ganjar Pranowo</h5>
+            </div>
+            <div class="card-block">
+                <div class="row align-items-center justify-content-center m-b-20">
+                    <div class="col-12">
+                        <h5 class="f-w-300 align-items-center m-0">Tertinggi: {{ cvs_max_ganjar_pranowo }}% &nbsp;&nbsp;
+                            Terrendah:
+                            {{ cvs_min_ganjar_pranowo }}%</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for value in cvs_ganjar_pranowo %}
+                    <div class="col-xl-12">
+                        <h6 class="align-items-center float-left">
+                            {{ value.no }}
+                        </h6>
+                        <h6 class="align-items-center float-right">{{ value.total }}%</h6>
+                        <div class="progress m-t-30 m-b-20" style="height: 6px;">
+                            <div class="progress-bar progress-c-theme{{ value.theme }}" role="progressbar"
+                                style="width: {{ value.total }}%;" aria-valuenow="{{ value.total }}" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-md-6">
+        <div class="card Recent-Users">
+
+            <div class="card-header">
+                <h5>Top 10 Kata Positif<br /><br />Anies Baswedan</h5>
+            </div>
+            <div class="card-block px-0 py-3">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+
+                        <tbody>
+                            <tr class="unread">
+                                <td>No</td>
+                                <td>Kata</td>
+                                <td>Total</td>
+                            </tr>
+                            {% for value in anies_baswedan_top_10_positif %}
+                            <tr class="unread">
+                                <td>{{ value.no }}</td>
+                                <td>{{ value.kata }}</td>
+                                <td>{{ value.total }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-md-6">
+        <div class="card Recent-Users">
+
+            <div class="card-header">
+                <h5>Top 10 Kata Positif<br /><br />Ganjar Pranowo</h5>
+            </div>
+            <div class="card-block px-0 py-3">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+
+                        <tbody>
+                            <tr class="unread">
+                                <td>No</td>
+                                <td>Kata</td>
+                                <td>Total</td>
+                            </tr>
+                            {% for value in ganjar_pranowo_top_10_positif %}
+                            <tr class="unread">
+                                <td>{{ value.no }}</td>
+                                <td>{{ value.kata }}</td>
+                                <td>{{ value.total }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-md-6">
+        <div class="card Recent-Users">
+
+            <div class="card-header">
+                <h5>Top 10 Kata Neutral<br /><br />Anies Baswedan</h5>
+            </div>
+            <div class="card-block px-0 py-3">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+
+                        <tbody>
+                            <tr class="unread">
+                                <td>No</td>
+                                <td>Kata</td>
+                                <td>Total</td>
+                            </tr>
+                            {% for value in anies_baswedan_top_10_neutral %}
+                            <tr class="unread">
+                                <td>{{ value.no }}</td>
+                                <td>{{ value.kata }}</td>
+                                <td>{{ value.total }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-md-6">
+        <div class="card Recent-Users">
+
+            <div class="card-header">
+                <h5>Top 10 Kata Neutral<br /><br />Ganjar Pranowo</h5>
+            </div>
+            <div class="card-block px-0 py-3">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+
+                        <tbody>
+                            <tr class="unread">
+                                <td>No</td>
+                                <td>Kata</td>
+                                <td>Total</td>
+                            </tr>
+                            {% for value in ganjar_pranowo_top_10_neutral %}
+                            <tr class="unread">
+                                <td>{{ value.no }}</td>
+                                <td>{{ value.kata }}</td>
+                                <td>{{ value.total }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-md-6">
+        <div class="card Recent-Users">
+
+            <div class="card-header">
+                <h5>Top 10 Kata Negatif<br /><br />Anies Baswedan</h5>
+            </div>
+            <div class="card-block px-0 py-3">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+
+                        <tbody>
+                            <tr class="unread">
+                                <td>No</td>
+                                <td>Kata</td>
+                                <td>Total</td>
+                            </tr>
+                            {% for value in anies_baswedan_top_10_negatif %}
+                            <tr class="unread">
+                                <td>{{ value.no }}</td>
+                                <td>{{ value.kata }}</td>
+                                <td>{{ value.total }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-md-6">
+        <div class="card Recent-Users">
+
+            <div class="card-header">
+                <h5>Top 10 Kata Negatif<br /><br />Ganjar Pranowo</h5>
+            </div>
+            <div class="card-block px-0 py-3">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+
+                        <tbody>
+                            <tr class="unread">
+                                <td>No</td>
+                                <td>Kata</td>
+                                <td>Total</td>
+                            </tr>
+                            {% for value in ganjar_pranowo_top_10_negatif %}
+                            <tr class="unread">
+                                <td>{{ value.no }}</td>
+                                <td>{{ value.kata }}</td>
+                                <td>{{ value.total }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!-- [ Main Content ] end -->
+
+{% endblock content %}

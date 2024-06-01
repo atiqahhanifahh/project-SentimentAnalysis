@@ -1,0 +1,111 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+
+{% block content %}
+
+<!-- [ Main Content ] start -->
+<div class="row">
+    <div class="col-md-12 col-xl-12">
+        <div class="card card-social">
+            <div class="card-block border-bottom">
+                <div class="row align-items-center justify-content-center">
+                    <!-- <div class="col-auto">
+            <i class="fab fa-facebook-f text-primary f-36"></i>
+          </div> -->
+
+                    <div class="col text-left">
+                        <h3 class="">Datasets Ganjar Pranowo</h3>
+                        <div class="mb-3"><span class="small">0 = Negatif, 1 = Positif, 2 = Netral</span>
+                            <hr />
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <h4>Update Datasets</h4>
+                                <div class="mb-3"><span class="small">Apabila ingin mengembalikan ke dataset awal
+                                        silahkan klik tombol reset</span>
+                                </div>
+                                <div><input required type="file" name="csv_file" class="mb-3" /></div>
+                                <input type="submit" class="btn btn-md btn-success" value="Simpan Datasets" /> <a
+                                    href="../static/datasets_ganjar.csv" taget="_blank"
+                                    class="btn btn-sm btn-primary">Download Datasets CSV</a> <a
+                                    href="{% url 'reset_datasets_ganjar' %}" class="btn btn-sm btn-danger">Reset
+                                    Datasets</a>
+                            </form>
+                            <hr />
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="myTable">
+                                    <thead>
+                                        <tr class="unread">
+                                            <th>No</th>
+                                            <th>Tweet</th>
+                                            <th>Label</th>
+                                            <th>Label SVM</th>
+                                            <th>Label NB</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for row in data %}
+                                        <tr>
+                                            <td>{{ row.index }}</td>
+                                            <td>{{ row.tweet }}</td>
+                                            <td>
+                                                {% if row.label == '0' %}
+                                                Negatif
+                                                {% elif row.label == '1' %}
+                                                Positif
+                                                {% else %}
+                                                Netral
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if row.svm %}
+                                                    {% if row.svm == '0' %}
+                                                    Negatif
+                                                    {% elif row.svm == '1' %}
+                                                    Positif
+                                                    {% else %}
+                                                    Netral
+                                                    {% endif %}
+                                                {% else %}
+                                                    -
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if row.nb %}
+                                                    {% if row.nb == '0' %}
+                                                    Negatif
+                                                    {% elif row.nb == '1' %}
+                                                    Positif
+                                                    {% else %}
+                                                    Netral
+                                                    {% endif %}
+                                                {% else %}
+                                                    -
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            let table = new DataTable('#myTable');
+        });
+    </script>
+
+    {% endblock content %}

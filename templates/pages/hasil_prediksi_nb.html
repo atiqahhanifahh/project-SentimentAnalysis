@@ -1,0 +1,61 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+
+{% block content %}
+
+<!-- [ Main Content ] start -->
+<div class="row">
+    <div class="col-md-12 col-xl-12">
+        <div class="card card-social">
+            <div class="card-block border-bottom">
+                <div class="row align-items-center justify-content-center">
+                    <!-- <div class="col-auto">
+            <i class="fab fa-facebook-f text-primary f-36"></i>
+          </div> -->
+
+                    <div class="col text-left">
+                        <h3 class="mb-3">Hasil Prediksi Menggunakan Naive Bayes</h3>
+                        <a href="../static/hasil_prediksi_naive_bayes.csv" taget="_blank" class="btn btn-sm btn-primary">Download Hasil CSV</a><br /><br />
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="myTable">
+                                <thead>
+                                    <tr class="unread">
+                                        <th>No</th>
+                                        <th>Tweet</th>
+                                        <th>Label</th>
+                                        <th>Prediksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in data %}
+                                    <tr>
+                                        <td>{{ row.index }}</td>
+                                        <td>{{ row.tweet }}</td>
+                                        <td>{{ row.label }}</td>
+                                        <td>{{ row.prediksi }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+<script>
+    $( document ).ready(function() {
+    let table = new DataTable('#myTable');
+});
+</script>
+
+{% endblock content %}
